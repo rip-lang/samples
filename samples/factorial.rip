@@ -1,0 +1,11 @@
+factorial_1 = -> (n, result = 1) {
+  if (n == 1) {
+    result
+  } else {
+    self(n - 1,  n * result)
+  }
+}
+
+factorial_2 = -> (n, result = 1) {
+  (n == 1) ? result : self(n - 1,  n * result)
+}
