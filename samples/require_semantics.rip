@@ -1,0 +1,61 @@
+# files are required with the System.require lambda
+
+# requiring a file does nothing until the assigned reference is (lazily) executed
+# when the file is needed for execution to continue, it is loaded and compiled into bytecode
+# this bytecode is then cached
+
+# the return value of a file will be the value passed to the return keyword or the value of the last
+# statement if no return keyword is encountered
+
+# files are discovered by checking each directory specified in the load path until the file is found
+
+# System is a predefined reference, just like true, false, nil et cetera
+
+
+# water.rip
+
+System.IO.out('this will never output because the file is never executed')
+
+class {
+  @.taste = :none
+}
+
+
+# fruit.rip
+
+System.IO.out('this will output when a new Apple is created')
+
+class {
+  @.initialize = -> (taste) {
+    receiver.taste = taste
+  }
+}
+
+
+# apple.rip
+
+Fruit, Water = System.require('fruit', 'water')
+
+class (Fruit) {
+  @.initialize = -> (taste, color) {
+    super(taste)
+    receiver.color = color
+  }
+}
+
+
+# main.rip
+
+Apple = System.require('apple')
+
+apple = Apple.new(:sweet, :red)
+
+System.IO.out("My #{apple.color} apple taste #{apple.taste}")
+
+
+# terminal
+
+# $ rip run main.rip
+# this will output when a new Apple is created
+# My red apple taste sweet
+# $

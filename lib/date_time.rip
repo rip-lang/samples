@@ -1,0 +1,5 @@
+# yyyy-mm-ddThh:mm:ss.0000-timezone (1980-10-16T09:15:00)
+# wraps Date and Time in a nice tidy package
+# DateTime objects (including literals) are assumed to be in UTC unless otherwise specified
+class {
+}

@@ -1,0 +1,5 @@
+class {
+  require = -> (paths...) {
+    # do something to lazily require each path
+  }
+}

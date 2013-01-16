@@ -1,0 +1,24 @@
+# top-level class
+# everything implicitly inherits from Object
+class {
+  # constructor...
+  @.initialize = -> {}
+
+  @.== = -> (other) {
+    false
+  }
+
+  @.method_missing = -> (message, *arguments) {}
+
+  @.to_string = -> {}
+
+  # allow dynamic inheritance
+  inherits = -> (args...) {}
+
+  new = -> (args...) {
+    # do stuff to instantiate a new object
+    # reply = ...
+    reply.initialize(*args)
+    reply
+  }
+}

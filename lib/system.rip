@@ -1,0 +1,7 @@
+# `hostname`
+# System literals also allow for interpolation like double-quoted strings
+# System objects must be called to be actually executed:
+# `hostname`   # => System literal
+# `hostname`() # => Executed System literal returns a System.Result object
+class {
+}

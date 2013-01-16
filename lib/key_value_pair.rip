@@ -1,0 +1,11 @@
+# :key : 'value'
+# any type of object may be a key or a value
+# keys are typically symbols, but do not have to be
+
+Object = System.Object
+
+class {
+  @.initialize = -> (key, value) {
+    receiver.key, receiver.value = key, value
+  }
+}<TKey = Object, TValue = Object>

@@ -1,0 +1,6 @@
+class {
+  @.initialize = -> (exit_code, result) {
+    receiver.exit_code = exit_code
+    receiver.results = results
+  }
+}

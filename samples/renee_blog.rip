@@ -1,0 +1,60 @@
+Renee = System.require(:renee)
+Blog = class (Renee) {}
+Post = System.require('models/post')
+
+Blog.run(-> {
+  # /blog
+  path(:blog, -> {
+    blog_posts = Post.all()
+
+    get(-> {
+      render!('posts/index')
+    })
+
+    post(-> {
+      Post.create(request.params[:post])
+      halt(:created)
+    })
+
+    # /blog/:id
+    var(:int, -> (id) {
+      blog_post = Post.get(id)
+
+      get(-> {
+        render!('posts/show', {:post: blog_post})
+      })
+
+      put(-> {
+        blog_post.update(request.params)
+        halt(:ok)
+      })
+
+      # /blog/:id/comments
+      path(:comments, -> {
+        get(-> {
+          render!('comments/show', {:post: blog_post, :comments: blog_post.comments})
+        })
+
+        post(-> {
+          blog_post.comments.create(request.params)
+          halt(:created)
+        })
+      })
+    })
+  })
+
+  # /color/:hex
+  path(:color).var(:hex).get(-> (color) {
+    html = <<HTML
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body bgcolor="##{color.to_string(16)}"></body>
+</html>
+    HTML
+    halt(html)
+  })
+}).setup(-> {
+  register_variable_type(:hex, /[0-9a-f]{6}/).on_transform(-> (v) { v.to_integer(16) }).raise_on_error!()
+  views_path('./views')
+})

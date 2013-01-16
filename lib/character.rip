@@ -1,0 +1,10 @@
+# `a or `b or `3
+# Represents any UTF-8 character
+# Wrap whitespace characters in single quotes:
+# `' for single quote
+# `' ' for space
+# `\t for tab
+# `\n for newline
+
+class {
+}

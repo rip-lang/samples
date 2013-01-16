@@ -1,0 +1,10 @@
+# 1..10 or 1...11
+# 1..10 and 1...11 are the same; both include 10 and exclude 11
+# ranges may be any type of object (that makes sense)
+class {
+  @.each = -> (args...) {
+    to_list().each(args...)
+  }
+
+  @.to_list = -> {}
+}

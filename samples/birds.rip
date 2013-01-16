@@ -1,0 +1,132 @@
+# http://samesake.com/log/2013/01/03/Three-little-birds/
+
+
+
+# identity
+# Ix = x
+idiot = -> (x) {
+  x
+}
+
+
+# identity
+# Mx = xx
+mockingbird = -> (x) {
+  x(x)
+}
+
+
+
+strange_fact = -> (fact) {
+  -> (n) {
+    return 1 if n < 2
+    stranger_fact = mockingbird(fact)
+    n * stranger_fact(n - 1)
+  }
+}
+# mockingbird(strange_fact)(23)
+# mockingbird(strange_fact) is strange_fact(strange_fact)
+
+
+
+factorial = -> (n) {
+  return 1 if n < 2
+  n * factorial(n - 1)
+}
+# factorial(23)
+
+
+
+# Bxyz = (x·y)z = x(yz)
+bluebird = -> (x) {
+  -> (y) {
+    -> (z) {
+      x(y(z))
+    }
+  }
+}
+bluebird = -> (x, y, z) {
+  x(y(z))
+}
+
+
+
+compose = bluebird
+times = -> (n) { -> (x) { x * n } }
+times_6 = compose(times(2))(times(3))
+invert = times(-1)
+times_negative_6 = compose(invert)(times_6)
+
+times_negative_6(-6) # 36
+
+
+
+lark = -> (x) {
+  # Mxy = x(My) = x(yy)
+  -> (y) {
+    x(mockingbird(y))
+  }
+}
+lark = -> (x) {
+  # Lxy = BxMy = x(My) = x(yy)
+  bluebird(x)(mockingbird)
+}
+
+
+
+meadowlark = -> (x) {
+  # Mₑxy = Mxy = xxy
+  -> (y) {
+    mockingbird(x)(y)
+  }
+}
+
+
+
+# y-combinator
+sage = -> (f) {
+  (-> (x) {
+    f(x(x))
+  })(-> (x) {
+    f(x(x))
+  })
+}
+sage = -> (f) {
+  mockingbird(-> (x) {
+    f(x(x))
+  })
+}
+sage = -> (f) {
+  mockingbird(lark(f))
+}
+sage = bluebird(mockingbird)(lark)
+
+
+
+# z-combinator
+sage = -> (x) {
+  # x = computation step, y = higher order fn
+  # Θx = M(BxMₑ) = M(x·Mₑ) = (x·Mₑ)(x·Mₑ) => (x(Mₑy))(x(Mₑy)) => (x(yy))(x(yy))
+  mockingbird(bluebird(x)(meadowlark))
+}
+
+
+
+factorial = -> (strange_bird) {
+  -> (n) {
+    return 1 if n < 2
+    n * strange_bird(n - 1)
+  }
+}
+
+
+
+broken_fact = factorial() # this function isn't tied to the sage bird, it's just a partial function
+broken_fact(1) # properly returns 1
+broken_fact(2) # blows up since strange_bird is not defined, meaning the only domain this function is defined for is 1
+
+
+
+sage_factorial = sage(factorial)
+sage_factorial(1)  # 1
+sage_factorial(12) # 479001600

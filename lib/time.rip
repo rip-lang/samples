@@ -1,0 +1,5 @@
+# hh:mm:ss.0000-timezone (09:15:00) or (09:15:00.125-4)
+# deals only with time (hours, minutes, seconds, milliseconds, timezone or offset)
+# Time objects (including literals) are assumed to be in UTC unless otherwise specified
+class {
+}

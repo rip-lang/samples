@@ -1,0 +1,9 @@
+# 'strings are character arrays' == [ `s, `t, `r, `i, `n, `g, `s, `' ', `a, `r, `e, `' ', `c, `h, `a, `r, `a, `c, `t, `e, `r, `' ', `a, `r, `r, `a, `y, `s ]
+# :symbol or '' or "" or HEREDOC
+# :one_word_string == 'one_word_string'
+# "" and HEREDOC are interpolated
+
+class (System.List<System.Character>) {
+  @.lowercase = -> {}
+  @.uppercase = -> {}
+}

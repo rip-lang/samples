@@ -1,0 +1,53 @@
+Renee = System.require(:renee)
+Post = System.require('models/post')
+
+Renee.run(-> {
+  # /posts
+  path('posts', -> {
+    blog_posts = Post.all()
+
+    get(-> {
+      render! :index
+    })
+
+    post(-> {
+      redirect! get_post_url(Post.create(request.params[:post]).id)
+    })
+
+    # /posts/new
+    path(:new, -> {
+      get(-> {
+        render! :new
+      })
+    })
+
+    # /posts/:id
+    var(:integer, {:as: :post}, -> (id) {
+      blog_post = Post.get(id)
+
+      get(-> {
+        render! :show, {:post: blog_post}
+      })
+
+      # or PATCH...
+      put(-> {
+        halt :update
+      })
+
+      delete(-> {
+        blog_post.delete!
+        halt :delete
+
+        # or redirect...
+        #redirect! get_posts_url()
+      })
+
+      # /posts/:id/edit
+      path(:edit, -> {
+        get(-> {
+          render! :edit, {:post: blog_post}
+        })
+      })
+    })
+  })
+})

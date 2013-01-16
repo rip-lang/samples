@@ -1,0 +1,18 @@
+# { :key : 'value', :key2 : 42 }                   # ?
+# { :key : 'value', :key2 : 42 }<String, Object>   # ?
+# [ :key : 'value', :key2 : 42 ]<KVP>
+# [ :key : 'value', :key2 : 42 ]<KVP<String, Object>>
+# collection of key-value pairs
+
+List = System.List
+KVP = System.KeyValuePair
+Object = System.Object
+
+class (List<KVP<TKey, TValue>>) {
+  @.each = => (block) {
+    return if receiver == []
+    kvp = shift()
+    block(kvp.key, kvp.value)
+    receiver[1..length()].each(block)
+  }
+}<TKey = Object, TValue = Object>

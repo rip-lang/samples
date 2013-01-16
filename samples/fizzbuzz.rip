@@ -1,0 +1,23 @@
+fizzbuzz = (1..100).map(-> (n) {
+  switch {
+    case ((n % 15).zero?) { :fizzbuzz }
+    case ((n % 5).zero?)  { :buzz }
+    case ((n % 3).zero?)  { :fizz }
+    else                  { n }
+  }
+})
+
+System.IO.out(fizzbuzz)
+
+
+
+# same as above, but without the temporary variable
+# also note that `out` is being called as an operator
+System.IO out (1..100).map(-> (n) {
+  switch {
+    case ((n % 15).zero?) { :fizzbuzz }
+    case ((n % 5).zero?)  { :buzz }
+    case ((n % 3).zero?)  { :fizz }
+    else                  { n }
+  }
+})

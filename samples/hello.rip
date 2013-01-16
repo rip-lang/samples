@@ -1,0 +1,9 @@
+class {
+  @.initialize = -> (name) {
+    receiver.name = name
+  }
+
+  @.greet = -> {
+    System.IO.out("Hello, #{receiver.name}!")
+  }
+}.new(:World).greet()

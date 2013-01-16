@@ -1,0 +1,15 @@
+numerals = from n in 1..100
+           where n % 7 == 0
+           where n.even?
+           select n: n.to_roman()
+
+# numerals is a list of key-value pairs
+numerals == [
+  14: :XIV,
+  28: :XXVIII,
+  42: :XLII,
+  56: :LVI,
+  70: :LXX,
+  84: :LXXXIV,
+  98: :XCVIII
+]

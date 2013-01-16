@@ -1,0 +1,13 @@
+class {
+  out = -> (strings...) {
+    strings.each(-> (string) {
+      receiver.standard_out(string.to_string())
+    })
+  }
+
+  out_line = -> (strings...) {
+    receiver.print(strings.map(-> (string) {
+      "#{string}\n"
+    }))
+  }
+}

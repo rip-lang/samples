@@ -1,0 +1,47 @@
+# -> is a keyword which defines a method literal
+# this evaluates to true
+[2, 4, 6] == [1, 2, 3].map(-> (number) {
+  number * 2
+})
+
+
+# => is also a keyword which defines a lambda literal
+# with -> the return keyword always returns from the lambda (like javascript return behaves in a callback function)
+# with => return returns from calling scope (like ruby return behaves in a callback block)
+
+outer = -> (inner) {
+  inner()
+
+  # later on...
+  # return here exits outer
+  # whether -> or => is used for defining inner, outer will continue after inner is called if inner does not use the return keyword to return (still thinking about this)
+}
+
+outer(-> {
+  # return here exits inner and outer keeps executing
+})
+
+outer(=> {
+  # return here exits inner and outer also
+  # outer's return value is whatever inner returns
+})
+
+
+# qualified names may have special characters, such as ! and ?
+Object.another_member! = -> () {}
+
+# 'Object' is a class object
+# new is not a keyword, but a class-level ->
+# the following pairs are equivalent
+Object.new()
+#'Object.new'() # TODO find a better way
+
+# saves a callback to a variable
+constructor = Object.new
+
+# call the callback
+constructor()
+
+# TODO find a better way
+#constructor_name = 'Object.new'
+#constructor_name()

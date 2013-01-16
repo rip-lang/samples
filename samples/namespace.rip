@@ -1,0 +1,8 @@
+# self == System.require('digest')
+class {
+  MD5 = System.require('digest/md5')
+  SHA1 = System.require('digest/sha1')
+  SHA256 = System.require('digest/sha256')
+  SHA512 = System.require('digest/sha512')
+  BCrypt = System.require('digest/bcrypt')
+}

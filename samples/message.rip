@@ -1,0 +1,72 @@
+# NOTE ported from https://github.com/ravinggenius/weekend/ Message class
+
+TZInfo = System.require(:tz_info)
+
+class {
+  @.initialize = -> (options = []) {
+    receiver.right_now = -> {
+      try {
+        TZInfo.Timezone.get(options[:zone])
+      } catch (TZInfo.InvalidTimezoneIdentifier) {
+        TZInfo.Timezone.get('Etc/UTC')
+      }.utc_to_local(options[:time] || Time.now)
+    }()
+
+    receiver.next_event = -> (time_zone) {
+      reply = right_now.monday + (is_weekend?() ? 1.week + 8.hours : 4.days + 17.hours)
+      (right_now.monday? && (right_now.hour < 8)) ? (reply - 1.week) : reply
+    }()
+  }
+
+  @.is_weekend? = -> {
+    switch {
+      case (right_now.sunday?)   { true }
+      case (right_now.monday?)   { right_now.hour < 8 }
+      case (right_now.friday?)   { right_now.hour >= 17 }
+      case (right_now.saturday?) { true }
+      else                       { false }
+    }
+  }
+
+  @.answer = -> {
+    is_weekend?() ? :Yes : :No
+  }
+
+  @.comment = -> {
+    is_weekend?() ? 'Enjoy it while it lasts!' : 'What a drag.'
+  }
+
+  @.countdown = -> {
+    reply = []
+
+    offset = (next_event - right_now).to_decimal()
+
+    offset = offset / 60 / 60
+    reply[:hour] = offset.floor
+
+    offset = (offset - offset.floor) * 60
+    reply[:minute] = offset.floor
+
+    offset = (offset - offset.floor) * 60
+    reply[:second] = offset.round
+
+    reply
+  }
+
+  @.as_json = -> {
+    cd = countdown()
+    {
+      :answer: answer(),
+      :comment: comment(),
+      :next_event: {
+        :hours: cd[:hour],
+        :minutes: cd[:minute],
+        :seconds: cd[:second]
+      }
+    }
+  }
+
+  @.to_json = -> {
+    as_json().to_json()
+  }
+}

@@ -1,0 +1,391 @@
+# [ 1, 'two', :three, Time.now ]
+# ordered collection of objects indexed by an auto-incremental integer
+# lists are zero-based
+class {
+  @.<< = -> {
+  }
+
+  @.<=> = -> {
+  }
+
+  @.== = -> {
+  }
+
+  @.| = -> {
+  }
+
+  @.- = -> {
+  }
+
+  @.[] = -> {
+  }
+
+  @.[]= = -> {
+  }
+
+  @.* = -> {
+  }
+
+  @.& = -> {
+  }
+
+  @.+ = -> {
+  }
+
+  @.all = -> {
+    reply = []
+
+    {
+      :map: [],
+      :where: []
+    }.each(-> (kvp) {
+      switch (kvp.key) {
+        case (:map) {
+          reply << kvp.value()
+        }
+        case (:where) {
+          next unless kvp.value()
+        }
+      }
+    }
+
+    reply
+  }
+
+  @.all? = -> {
+  }
+
+  @.any? = -> (block) {
+    reply = false
+    each(-> (object) {
+      reply = true if block(object)
+    })
+    reply
+  }
+
+  assoc = -> {
+  }
+
+  at = -> {
+  }
+
+  chunk = -> {
+  }
+
+  clear = -> {
+  }
+
+  collect = -> {
+  }
+
+  collect_concat = -> {
+  }
+
+  combination = -> {
+  }
+
+  compact = -> {
+  }
+
+  concat = -> {
+  }
+
+  count = -> {
+  }
+
+  cycle = -> {
+  }
+
+  delete = -> {
+  }
+
+  delete_at = -> {
+  }
+
+  delete_if = -> {
+  }
+
+  @.detect = -> (block) {
+    each(=> (item) {
+      return item if block(item)
+    })
+    nil
+  }
+
+  drop = -> {
+  }
+
+  drop_while = -> {
+  }
+
+  each = -> (block) {
+    return receiver if receiver == []
+    block(receiver.shift())
+    receiver.skip().each(block)
+    receiver
+  }
+
+  each_cons = -> {
+  }
+
+  each_entry = -> {
+  }
+
+  each_index = -> {
+  }
+
+  each_slice = -> {
+  }
+
+  each_with_index = -> {
+  }
+
+  each_with_object = -> {
+  }
+
+  empty? = -> {
+  }
+
+  entries = -> {
+  }
+
+  eql? = -> {
+  }
+
+  fetch = -> {
+  }
+
+  fill = -> {
+  }
+
+  find = -> {
+  }
+
+  find_all = -> {
+  }
+
+  find_index = -> {
+  }
+
+  first = -> {
+    [](0)
+  }
+
+  flat_map = -> {
+  }
+
+  flatten = -> {
+  }
+
+  frozen? = -> {
+  }
+
+  grep = -> {
+  }
+
+  group_by = -> {
+  }
+
+  hash = -> {
+  }
+
+  include? = -> {
+  }
+
+  index = -> {
+  }
+
+  initialize = -> {
+  }
+
+  initialize_copy = -> {
+  }
+
+  inject = -> {
+  }
+
+  insert = -> {
+  }
+
+  inspect = -> {
+  }
+
+  join = -> {
+  }
+
+  keep_if = -> {
+  }
+
+  last = -> {
+    [](length() - 1)
+  }
+
+  length = -> {
+  }
+
+  map = -> (block) {
+    reply = []
+    each(-> (object) {
+      reply << block(object)
+    })
+    reply
+  }
+
+  max = -> {
+  }
+
+  max_by = -> {
+  }
+
+  member? = -> {
+  }
+
+  min = -> {
+  }
+
+  min_by = -> {
+  }
+
+  minmax = -> {
+  }
+
+  minmax_by = -> {
+  }
+
+  none? = -> {
+  }
+
+  one? = -> {
+  }
+
+  pack = -> {
+  }
+
+  partition = -> {
+  }
+
+  permutation = -> {
+  }
+
+  pop = -> {
+  }
+
+  pretty_print = -> {
+  }
+
+  pretty_print_cycle = -> {
+  }
+
+  product = -> {
+  }
+
+  push = -> {
+  }
+
+  rassoc = -> {
+  }
+
+  reduce = -> {
+  }
+
+  reject = -> {
+  }
+
+  repeated_combination = -> {
+  }
+
+  repeated_permutation = -> {
+  }
+
+  replace = -> {
+  }
+
+  reverse = -> {
+  }
+
+  reverse_each = -> {
+  }
+
+  rindex = -> {
+  }
+
+  rotate = -> {
+  }
+
+  sample = -> {
+  }
+
+  select = -> {
+  }
+
+  shelljoin = -> {
+  }
+
+  shift = -> {
+  }
+
+  shuffle = -> {
+  }
+
+  size = -> {
+  }
+
+  skip = -> (count = 1) {
+    receiver[count..-1]
+  }
+
+  slice_before = -> {
+  }
+
+  slice = -> {
+  }
+
+  sort = -> {
+  }
+
+  sort_by = -> {
+  }
+
+  taguri = -> {
+  }
+
+  taguri= = -> {
+  }
+
+  take = -> {
+  }
+
+  take_while = -> {
+  }
+
+  tail = -> {
+    receiver[1..-1]
+  }
+
+  to_list = -> {
+  }
+
+  to_string = -> {
+  }
+
+  to_yaml = -> {
+  }
+
+  transpose = -> {
+  }
+
+  uniq = -> {
+  }
+
+  unshift = -> {
+  }
+
+  values_at = -> {
+  }
+
+  yaml_initialize = -> {
+  }
+
+  zip = -> {
+  }
+}<T = System.Object>

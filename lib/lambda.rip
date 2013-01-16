@@ -1,0 +1,14 @@
+# -> {} or => {}
+class {
+  @.initialize = -> (receiver) {
+    self.arity = 0 # set this dynamically
+  }
+
+  @.apply = -> (receiver, arguments...) {
+    bind(receiver)(arguments...)
+  }
+
+  @.bind = -> (new_receiver) {
+    receiver.class.new(new_receiver, self)
+  }
+}

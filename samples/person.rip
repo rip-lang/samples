@@ -1,0 +1,33 @@
+Person = class {
+  @.initialize = -> (first, last) {
+    receiver.first_name, receiver.last_name = first, last
+    receiver.full_name = "#{first} #{last}"
+  }
+
+  @.salute = -> (other) {
+    "I salute you, #{other}"
+  }
+
+  @.to_string = -> {
+    receiver.full_name
+  }
+
+  @.== = -> (other) {
+    receiver.full_name == other.full_name
+  }
+
+  # alias...
+  @.equals = @.==
+}
+
+person = Person.new(:Thomas, :Ingram)
+
+person == Person.new(:Thomas, :Ingram)
+person.==(Person.new(:Thomas, :Ingram))
+person equals Person.new(:Thomas, :Ingram)
+person.equals(Person.new(:Thomas, :Ingram))
+
+person salute Person.new(:Mike, :Luddy) == 'I salute you, Mike Luddy'
+person.salute(Person.new(:Mike, :Luddy)).==('I salute you, Mike Luddy')
+
+return Person

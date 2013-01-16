@@ -1,0 +1,38 @@
+# Models, Models.Node and Models.User are all plain old classes
+Models = class {
+  Node = class {
+  }
+}
+
+Models.User = class {
+  # initialize is the constructor - called by Models.User.new() automatically
+  @.initialize = -> (birthday) {
+    receiver.birthday = birthday
+  }
+
+  @.age = -> {
+    # DateTime is a standard class
+    DateTime.now() - birthday
+  }
+}
+
+Fruit = class {
+  @.initialize = -> {}
+}
+class (Fruit) {
+  @.initialize = -> {
+    # call Fruit#initialize()
+    receiver.class.initialize()
+  }
+}
+
+# anonymous class with immediate instantiation
+class {
+  @.initialize = -> (subject) {
+    receiver.hello(subject)
+  }
+
+  @.hello = -> (subject) {
+    System.IO.out("Hello #{subject}")
+  }
+}.new('World') # prints "Hello World\n" to standard out
